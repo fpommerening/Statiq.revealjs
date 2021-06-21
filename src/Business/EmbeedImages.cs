@@ -51,7 +51,7 @@ namespace FP.Statiq.RevealJS.Business
             {
                 var baseUrl = context.Settings["baseUrl"].ToString();
                 var sectionPath = document[MetadataKeys.SectionPath].ToString();
-                var path = Path.Combine(baseUrl, sectionPath, src);
+                var path = Path.Combine(baseUrl, Path.GetDirectoryName(sectionPath), src);
                 imageData = await File.ReadAllBytesAsync(path);
             }
 
