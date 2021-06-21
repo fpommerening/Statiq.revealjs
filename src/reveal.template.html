@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+
+	<meta name="description" content="Container in den Wolken">
+	<meta name="author" content="Frank Pommerening ">
+	<meta name="author" content="Max Marschall">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="./presentation/dist/global.css">
+
+	<link rel="stylesheet" href="./presentation/dist/reset.css">
+	<link rel="stylesheet" href="./presentation/dist/reveal.css">
+	<link rel="stylesheet" href="./presentation/dist/theme/black.css" id="theme">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="./presentation/plugin/highlight/monokai.css">
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+		    [[SLIDES]]
+		</div>
+
+	</div>
+
+	<script src="./presentation/dist/reveal.js"></script>
+	<script src="./presentation/plugin/zoom/zoom.js"></script>
+	<script src="./presentation/plugin/notes/notes.js"></script>
+	<script src="./presentation/plugin/search/search.js"></script>
+	<script src="./presentation/plugin/highlight/highlight.js"></script>
+	<script src="./presentation/plugin/menu/menu.js"></script>
+	<script>
+
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+			hash: true,
+			width: 1250,
+			height: 720,
+			slideNumber: true,
+			margin: 0.0,
+
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealZoom, RevealNotes, RevealSearch, RevealHighlight, RevealMenu],
+
+			menu: {
+				numbers: 'c',
+				openSlideNumber: true,
+				themes: true,
+				themesPath: './presentation/dist/theme/',
+				transitions: true,
+				custom: false,
+
+
+			}
+		});
+
+	</script>
+
+</body>
+
+</html>
