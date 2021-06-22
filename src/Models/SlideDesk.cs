@@ -15,5 +15,7 @@ namespace FP.Statiq.RevealJS.Models
         public string Theme { get; set; }
 
         public string Password { get; set; }
+
+        public string Copyright { get; set; }
     }
 }

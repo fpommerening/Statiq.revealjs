@@ -1,4 +1,5 @@
 ﻿using Statiq.Core;
+using Statiq.Minification;
 
 namespace FP.Statiq.RevealJS.Business
 {
@@ -13,6 +14,7 @@ namespace FP.Statiq.RevealJS.Business
             ProcessModules.Add(embeedImages);
             PostProcessModules.Add(new RenderDeck());
             PostProcessModules.Add(new EncryptContent());
+            PostProcessModules.Add(new MinifyHtml());
             OutputModules.Add(new WriteFiles());
 
         }

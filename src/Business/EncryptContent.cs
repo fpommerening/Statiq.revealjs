@@ -67,7 +67,9 @@ namespace FP.Statiq.RevealJS.Business
             }
 
             var json = JsonSerializer.Serialize(encryptedData);
-            var content = Resources.pagecrypt_template.Replace("/*{{ENCRYPTED_PAYLOAD}}*/\"\"", json);
+            var content = Resources.pagecrypt_template
+                .Replace("{{TITLE}}", $"{input[MetadataKeys.SlideDeskTitle]}")
+                .Replace("/*{{ENCRYPTED_PAYLOAD}}*/\"\"", json);
             var encryptedDoc = new Document(input.Destination, context.GetContentProvider(content, MediaTypes.Html));
             return encryptedDoc.Yield();
         }

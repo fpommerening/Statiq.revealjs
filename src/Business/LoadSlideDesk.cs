@@ -23,7 +23,8 @@ namespace FP.Statiq.RevealJS.Business
                 {MetadataKeys.SlideDeskTitle, slidedesk.Title},
                 {MetadataKeys.SlideDeskDescription, slidedesk.Description},
                 {MetadataKeys.SlideDeskTheme, slidedesk.Theme},
-                {MetadataKeys.SlideDeskPassword, slidedesk.Password}
+                {MetadataKeys.SlideDeskPassword, slidedesk.Password},
+                {MetadataKeys.SlideDeskCopyright, slidedesk.Copyright}
             };
 
             foreach (var section in slidedesk.Sections)

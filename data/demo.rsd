@@ -1,19 +1,72 @@
 {
   "Sections": [
     {
-      "Content":"\u003Csection data-state=\u0022title\u0022\u003Ch2 \u003E Vorstellung \u003C/ h2 \u003E\u003C/section\u003E"
-      },
-    {
-      "Path" : "Introduction/docker-introduction-1.0"
+      "Path" : "Introduction/k8s-introduction-no-company-1.0"
     },
     {
-      "Path" : "Cloud-Overview/overview-1.0"
+      "Path" : "K3S-Overview/overview-1.1"
+    },
+    {
+      "Path" : "K3S-Overview/calico-1.0"
+    },
+    {
+      "Path" : "K8S-Storage/overview-1.0"
+    },
+    {
+      "Path" : "K8S-Storage/persistent-volume-1.0"
+    },
+    {
+      "Path" : "K8S-UpdateStrategy/overview-1.0"
+    },
+    {
+      "Path" : "K8S-UpdateStrategy/rolling-1.0"
+    },
+    {
+      "Path" : "K8S-UpdateStrategy/recreate-1.0"
+    },
+    {
+      "Path" : "K8S-UpdateStrategy/blue-green-1.0"
+    },
+    {
+      "Path" : "K8S-UpdateStrategy/canary-1.0"
+    },
+    {
+      "Path" : "K8S-Pattern/init-container-1.0"
+    },
+    {
+      "Path" : "K8S-Pattern/sidecar-1.0"
+    },
+    {
+      "Path" : "K8S-Helm/overview-1.0"
+    },
+    {
+      "Path" : "K8S-Helm/usage-1.0"
     },
     {
       "Path" : "Prometheus-Overview/overview-1.0"
+    },
+    {
+      "Path" : "K8S-Prometheus/operator-1.0"
+    },
+    {
+      "Path" : "K8S-Autoscale/overview-1.0"
+    },
+{
+      "Path" : "K8S-Prometheus/adpater-1.0"
+    },
+    {
+      "Path" : "K8S-ServiceMesh/common-overview-1.0"
+    },
+    {
+      "Path" : "K8S-ServiceMesh/linkerd-overview-1.0"
+    },
+    {
+      "Path" : "Termination/termination-default-1.0"
     }
   ],
+  "Title" : "Kubernetes für Entwickler (Fortgeschritten)",
   "Description" : "ganz wichtig",
   "Access" : "b56ba",
-  "Password" : ""
+  "Password" : "geheim",
+  "Copyright" : ""
 }
