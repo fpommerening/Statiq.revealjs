@@ -23,11 +23,9 @@ namespace FP.Statiq.RevealJS
             await Bootstrapper
                 .Factory
                 .CreateDefault(args)
-                
+
                 .ConfigureServices((services, config) =>
                 {
-                    services.AddHttpClient();
-                    services.AddTransient<EmbeedImages>();
                 })
                 .AddDefaultConfigurationFiles()
                 .AddInputPath(@"C:\projects\Statiq.revealjs\data")

@@ -15,17 +15,17 @@ namespace FP.Statiq.RevealJS.Business
     public class EmbeedImages : ProcessHtml
     {
 
-        public EmbeedImages(HttpClient httpClient) : base("IMG",
-            (document, context, element) => ProcessElement(httpClient, document, context, element))
+        public EmbeedImages() : base("IMG",
+            (document, context, element) => ProcessElement(document, context, element))
         {
         }
 
-        private static void ProcessElement(HttpClient httpClient, IDocument document, IExecutionContext context, IElement imgElement)
+        private static void ProcessElement(IDocument document, IExecutionContext context, IElement imgElement)
         {
-            ProcessElementAsync(httpClient, document, context, imgElement).GetAwaiter().GetResult();
+            ProcessElementAsync(document, context, imgElement).GetAwaiter().GetResult();
         }
 
-        private static async Task ProcessElementAsync(HttpClient httpClient, IDocument document, IExecutionContext context, IElement imgElement)
+        private static async Task ProcessElementAsync(IDocument document, IExecutionContext context, IElement imgElement)
         {
             
             var src = imgElement.GetAttribute("src");
@@ -43,7 +43,7 @@ namespace FP.Statiq.RevealJS.Business
 
             if (src.StartsWith("http"))
             {
-                var imageResult = await httpClient.GetAsync(src);
+                var imageResult = await context.SendHttpRequestWithRetryAsync(src);
                 imageResult.EnsureSuccessStatusCode();
                 imageData = await imageResult.Content.ReadAsByteArrayAsync();
             }
