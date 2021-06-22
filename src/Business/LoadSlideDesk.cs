@@ -22,7 +22,7 @@ namespace FP.Statiq.RevealJS.Business
                 {MetadataKeys.SlideDeskAccess, slidedesk.Access},
                 {MetadataKeys.SlideDeskTitle, slidedesk.Title},
                 {MetadataKeys.SlideDeskDescription, slidedesk.Description},
-                {MetadataKeys.SlideDeskTheme, slidedesk.Theme},
+                {MetadataKeys.SlideDeskTheme, string.IsNullOrEmpty(slidedesk.Theme) ? "white.css" : slidedesk.Theme},
                 {MetadataKeys.SlideDeskPassword, slidedesk.Password},
                 {MetadataKeys.SlideDeskCopyright, slidedesk.Copyright}
             };

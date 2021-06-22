@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<title></title>
+    <meta charset="utf-8">
+    <title></title>
 
 	<meta name="description" content="">
 
@@ -26,7 +26,7 @@
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 		</div>
-		<div class="copyright">Frank Pommerening - Spartakiade 2021</div>
+		<div class="copyright"></div>
 	</div>
 
 	<script src="./presentation/dist/reveal.js"></script>
@@ -35,35 +35,9 @@
 	<script src="./presentation/plugin/search/search.js"></script>
 	<script src="./presentation/plugin/highlight/highlight.js"></script>
 	<script src="./presentation/plugin/menu/menu.js"></script>
-	<script>
+	<script id="reveal-init">
 
-		Reveal.initialize({
-			controls: true,
-			progress: true,
-			history: true,
-			center: true,
-			hash: true,
-			width: 1250,
-			height: 720,
-			slideNumber: true,
-			margin: 0.0,
-
-
-			// Learn about plugins: https://revealjs.com/plugins/
-			plugins: [RevealZoom, RevealNotes, RevealSearch, RevealHighlight, RevealMenu],
-
-			menu: {
-				numbers: 'c',
-				openSlideNumber: true,
-				themes: true,
-				themesPath: './presentation/dist/theme/',
-				transitions: true,
-				custom: false,
-
-
-			}
-		});
-
+		
 	</script>
 
 </body>
