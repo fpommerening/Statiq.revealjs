@@ -30,6 +30,7 @@ namespace FP.Statiq.RevealJS
                 .AddDefaultConfigurationFiles()
                 .AddInputPath(@"C:\projects\Statiq.revealjs\data")
                 .AddPipeline<ContentPipeline>()
+                .AddPipeline<FrameworkPipeline>()
 
                 //.BuildPipeline("", builder => builder
                 //    .WithProcessModules(new LoadSlideDesk())

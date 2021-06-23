@@ -59,7 +59,7 @@ namespace FP.Statiq.RevealJS.Business
 
         private void SetTheme(IHtmlDocument htmlDocument, IDocument input)
         {
-            var cssPath = Path.Combine("./presentation/dist/theme/", input[MetadataKeys.SlideDeskTheme].ToString());
+            var cssPath = Path.Combine("../presentation/dist/theme/", input[MetadataKeys.SlideDeskTheme].ToString());
             var links = htmlDocument.QuerySelectorAll("link");
             links.Single(x=>x.Id == "theme").SetAttribute("href", cssPath);
         }
@@ -85,7 +85,7 @@ namespace FP.Statiq.RevealJS.Business
             sb.AppendLine("numbers: 'c',");
             sb.AppendLine("openSlideNumber: true,");
             sb.AppendLine("themes: true,");
-            sb.AppendLine("themesPath: './presentation/dist/theme/',");
+            sb.AppendLine("themesPath: '../presentation/dist/theme/',");
             sb.AppendLine("transitions: true,");
             sb.AppendLine("custom: false");
             sb.AppendLine("}");
