@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Statiq.RevealJS": {
+      "commandName": "Project",
+      "commandLineArgs": "--input C:/projects/Statiq.revealjs/data --setting baseurl=C:/projects/gh-pages/test/Slides"
+    }
+  }
+}

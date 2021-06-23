@@ -1,15 +1,7 @@
-﻿using System;
-using System.Text.Json;
-using System.Threading.Tasks;
-using AngleSharp.Dom;
+﻿using System.Threading.Tasks;
 using FP.Statiq.RevealJS.Business;
-using FP.Statiq.RevealJS.Models;
-using Jint.Parser.Ast;
-using Microsoft.Extensions.DependencyInjection;
 using Statiq.App;
 using Statiq.Common;
-using Statiq.Html;
-using Statiq.Images;
 
 namespace FP.Statiq.RevealJS
 {
@@ -17,8 +9,6 @@ namespace FP.Statiq.RevealJS
     {
         public static async Task<int> Main(string[] args)
         {
-            args = new[] {"--base", "test"};
-
             return 
             await Bootstrapper
                 .Factory
@@ -27,8 +17,8 @@ namespace FP.Statiq.RevealJS
                 .ConfigureServices((services, config) =>
                 {
                 })
-                .AddDefaultConfigurationFiles()
-                .AddInputPath(@"C:\projects\Statiq.revealjs\data")
+                //.AddDefaultConfigurationFiles()
+                //.AddInputPath(@"C:\projects\Statiq.revealjs\data")
                 .AddPipeline<ContentPipeline>()
                 .AddPipeline<FrameworkPipeline>()
 
