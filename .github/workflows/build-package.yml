@@ -47,11 +47,14 @@ jobs:
       uses: docker/metadata-action@v3
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: |
+         type=sha
+         type=raw,value=v1.0.0
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
         context: .
         push: true
-        tags: ${{ steps.meta.outputs.tags }} v1
+        tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
