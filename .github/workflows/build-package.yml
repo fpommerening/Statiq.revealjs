@@ -20,7 +20,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore src/Statiq.RevealJS.csproj
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore src/Statiq.RevealJS.csproj
     - name: Publish
-      run: dotnet publish -c release
+      run: dotnet publish -c release -o out src/Statiq.RevealJS.csproj
 
