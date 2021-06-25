@@ -2,7 +2,7 @@
   "profiles": {
     "Statiq.RevealJS": {
       "commandName": "Project",
-      "commandLineArgs": "--input C:/projects/Statiq.revealjs/data --setting baseurl=C:/projects/gh-pages/test/Slides"
+      "commandLineArgs": "--input C:/projects/slides/Slidedesks --setting baseurl=C:/projects/slides/Content"
     }
   }
 }

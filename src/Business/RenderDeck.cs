@@ -16,7 +16,20 @@ namespace FP.Statiq.RevealJS.Business
     {
         protected override async Task<IEnumerable<IDocument>> ExecuteContextAsync(IExecutionContext context)
         {
-            var orderedDocuments = context.Inputs.Sort(new DocumentMetadataComparer<IDocument, int>("Position"));
+            var groupedDocuments = context.Inputs.Sort(new DocumentMetadataComparer<IDocument, int>("Position"))
+                .GroupBy<string>(MetadataKeys.SlideDeskAccess);
+
+            var result = new List<IDocument>();
+
+            foreach (var docs in groupedDocuments)
+            {
+                result.Add(await CreateSlideDesk(docs.ToList(), context));
+            }
+            return result;
+        }
+
+        private async Task<IDocument> CreateSlideDesk(List<IDocument> orderedDocuments, IExecutionContext context)
+        {
             var firstInput = orderedDocuments[0];
 
             var parser = new HtmlParser();
@@ -31,7 +44,7 @@ namespace FP.Statiq.RevealJS.Business
 
             var copyright = firstInput[MetadataKeys.SlideDeskCopyright]?.ToString();
             FillElement(htmlDocument, "div.copyright", e => e.TextContent = copyright);
-            
+
             htmlDocument.QuerySelector("title").TextContent = firstInput[MetadataKeys.SlideDeskTitle].ToString();
             SetTheme(htmlDocument, firstInput);
             InitRevealScript(htmlDocument, firstInput);
@@ -43,9 +56,8 @@ namespace FP.Statiq.RevealJS.Business
                 writer.Flush();
                 var doc = new Document($"{firstInput[MetadataKeys.SlideDeskAccess]}/index.html", firstInput, context.GetContentProvider(contentStream,
                     MediaTypes.Html));
-                return doc.Yield();
+                return doc;
             }
-
         }
 
         private void FillElement(IHtmlDocument htmlDocument, string querySelector, Action<AngleSharp.Dom.IElement> fillAction )

@@ -19,7 +19,6 @@ namespace FP.Statiq.RevealJS.Business
             var index = 0;
             var metadataItems = new MetadataItems
             {
-                {MetadataKeys.SlideDeskAccess, slidedesk.Access},
                 {MetadataKeys.SlideDeskTitle, slidedesk.Title},
                 {MetadataKeys.SlideDeskDescription, slidedesk.Description},
                 {MetadataKeys.SlideDeskTheme, string.IsNullOrEmpty(slidedesk.Theme) ? "white.css" : slidedesk.Theme},
@@ -31,6 +30,7 @@ namespace FP.Statiq.RevealJS.Business
             {
                 index += 10;
                 metadataItems.Add(MetadataKeys.SectionPosition, index);
+                metadataItems.Add(MetadataKeys.SlideDeskAccess, slidedesk.Access);
                 if (!string.IsNullOrEmpty(section.Content))
                 {
                     metadataItems.Add(MetadataKeys.SectionPath, string.Empty);

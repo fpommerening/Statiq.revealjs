@@ -16,13 +16,12 @@ namespace FP.Statiq.RevealJS.Business
         private const int Iterations = 1000;
         private const int KeySize = 32;
 
-        protected override async Task<IEnumerable<IDocument>> ExecuteContextAsync(IExecutionContext context)
+        protected override async Task<IEnumerable<IDocument>> ExecuteInputAsync(IDocument input, IExecutionContext context)
         {
-            var input = context.Inputs.First();
             var password = input[MetadataKeys.SlideDeskPassword]?.ToString();
             if (string.IsNullOrEmpty(password))
             {
-                return context.Inputs;
+                return input.Yield();
             }
 
             var salt = new byte[32];
@@ -37,10 +36,10 @@ namespace FP.Statiq.RevealJS.Business
                 pbkdf2.IterationCount = Iterations;
                 key = pbkdf2.GetBytes(KeySize);
             }
-           
+
             var reader = input.ContentProvider.GetTextReader();
             var planeText = await reader.ReadToEndAsync();
-           
+
             var encryptedData = new EncryptedData
             {
                 salt = Convert.ToBase64String(salt),
@@ -63,7 +62,7 @@ namespace FP.Statiq.RevealJS.Business
                         encryptedData.data = Convert.ToBase64String(data);
                     }
                 }
-                
+
             }
 
             var json = JsonSerializer.Serialize(encryptedData);
