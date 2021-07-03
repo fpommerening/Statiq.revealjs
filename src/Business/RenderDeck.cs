@@ -82,14 +82,14 @@ namespace FP.Statiq.RevealJS.Business
             var script = scripts.Single(x => x.Id == "reveal-init");
             var sb = new StringBuilder();
             sb.AppendLine("Reveal.initialize({");
-            sb.AppendLine("controls: true,");
+            sb.AppendLine("controls: false,");
             sb.AppendLine("progress: true,");
             sb.AppendLine("history: true,");
             sb.AppendLine("center: true,");
             sb.AppendLine("hash: true,");
             sb.AppendLine("width: 1250,");
             sb.AppendLine("height: 720,");
-            sb.AppendLine("slideNumber: true,");
+            sb.AppendLine("slideNumber: false,");
             sb.AppendLine("margin: 0.0,");
             sb.AppendLine("plugins:[RevealZoom, RevealNotes, RevealSearch, RevealHighlight, RevealMenu],");
             sb.AppendLine("menu:");
