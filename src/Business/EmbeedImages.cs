@@ -60,7 +60,7 @@ namespace FP.Statiq.RevealJS.Business
             {
                 imgElement.SetAttribute("src", $"data:image/svg+xml;base64, {imageDataDecoded}");
             }
-            else if (src.StartsWith("png"))
+            else if (src.EndsWith("png"))
             {
                 imgElement.SetAttribute("src", $"data:image/png;base64, {imageDataDecoded}");
             }
