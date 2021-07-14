@@ -23,7 +23,7 @@ namespace FP.Statiq.RevealJS.Business
             _replaceFolder = replaceFolder;
         }
 
-        protected override async Task<IEnumerable<IDocument>> ExecuteInputAsync(IDocument input, IExecutionContext context)
+        protected override Task<IEnumerable<IDocument>> ExecuteInputAsync(IDocument input, IExecutionContext context)
         {
             var sourceUri = (Uri) input["SourceUri"];
             var result = new List<IDocument>();
@@ -53,7 +53,7 @@ namespace FP.Statiq.RevealJS.Business
                 }
             }
 
-            return result;
+            return Task.FromResult((IEnumerable<IDocument>) result);
         }
     }
 }
