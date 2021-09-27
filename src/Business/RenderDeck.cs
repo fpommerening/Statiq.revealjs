@@ -100,6 +100,7 @@ namespace FP.Statiq.RevealJS.Business
             sb.AppendLine("themesPath: '../presentation/dist/theme/',");
             sb.AppendLine("transitions: true,");
             sb.AppendLine("custom: false");
+            sb.AppendLine("},");
 
             var multiplexUrl = input[MetadataKeys.MultiplexUrl]?.ToString();
             var multiplexSocketId = input[MetadataKeys.MultiplexId]?.ToString();
@@ -107,11 +108,12 @@ namespace FP.Statiq.RevealJS.Business
 
             if (string.IsNullOrEmpty(multiplexUrl) || string.IsNullOrEmpty(multiplexSocketId))
             {
-                sb.AppendLine("}");
+                sb.AppendLine("dependencies:[");
+                sb.AppendLine("{ src: '../presentation/plugin/countdown/countdown.js' },");
+                sb.AppendLine("]");
             }
             else
             {
-                sb.AppendLine("},");
                 sb.AppendLine("multiplex: {");
 
                 sb.AppendLine($"secret: '{multiplexSecret}',");
@@ -120,6 +122,7 @@ namespace FP.Statiq.RevealJS.Business
                 sb.AppendLine("},");
 
                 sb.AppendLine("dependencies:[");
+                sb.AppendLine("{ src: '../presentation/plugin/countdown/countdown.js' },");
                 sb.AppendLine("{ src: '../presentation/plugin/multiplex/socket.io.js', async: true },");
                 if (string.IsNullOrEmpty(multiplexSecret))
                 {
@@ -130,6 +133,7 @@ namespace FP.Statiq.RevealJS.Business
                     //sb.AppendLine("{ src: '../presentation/plugin/multiplex/client.js', async: true },");
                     sb.AppendLine("{ src: '../presentation/plugin/multiplex/master.js', async: true }");
                 }
+                
                 sb.AppendLine("]");
             }
 
