@@ -26,6 +26,27 @@ namespace FP.Statiq.RevealJS.Business
                 {MetadataKeys.SlideDeskCopyright, slidedesk.Copyright}
             };
 
+            if (slidedesk.Multiplex != null && !string.IsNullOrEmpty(slidedesk.Multiplex.SocketId))
+            {
+                metadataItems.Add(new KeyValuePair<string, object>(MetadataKeys.MultiplexId, slidedesk.Multiplex.SocketId));
+                metadataItems.Add(new KeyValuePair<string, object>(MetadataKeys.MultiplexUrl, slidedesk.Multiplex.Url));
+                if (!string.IsNullOrEmpty(slidedesk.Multiplex.Secret))
+                {
+                    metadataItems.Add(new KeyValuePair<string, object>(MetadataKeys.MultiplexSecret, slidedesk.Multiplex.Secret));
+                }
+                else
+                {
+                    metadataItems.Add(new KeyValuePair<string, object>(MetadataKeys.MultiplexSecret, string.Empty));
+                }
+            }
+            else
+            {
+                metadataItems.Add(new KeyValuePair<string, object>(MetadataKeys.MultiplexId, string.Empty));
+                metadataItems.Add(new KeyValuePair<string, object>(MetadataKeys.MultiplexUrl, string.Empty));
+                metadataItems.Add(new KeyValuePair<string, object>(MetadataKeys.MultiplexSecret, string.Empty));
+            }
+
+
             foreach (var section in slidedesk.Sections)
             {
                 index += 10;

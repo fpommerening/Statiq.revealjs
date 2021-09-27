@@ -100,7 +100,39 @@ namespace FP.Statiq.RevealJS.Business
             sb.AppendLine("themesPath: '../presentation/dist/theme/',");
             sb.AppendLine("transitions: true,");
             sb.AppendLine("custom: false");
-            sb.AppendLine("}");
+
+            var multiplexUrl = input[MetadataKeys.MultiplexUrl]?.ToString();
+            var multiplexSocketId = input[MetadataKeys.MultiplexId]?.ToString();
+            var multiplexSecret = input[MetadataKeys.MultiplexSecret]?.ToString();
+
+            if (string.IsNullOrEmpty(multiplexUrl) || string.IsNullOrEmpty(multiplexSocketId))
+            {
+                sb.AppendLine("}");
+            }
+            else
+            {
+                sb.AppendLine("},");
+                sb.AppendLine("multiplex: {");
+
+                sb.AppendLine($"secret: '{multiplexSecret}',");
+                sb.AppendLine($"id: '{multiplexSocketId}',");
+                sb.AppendLine($"url: '{multiplexUrl}'");
+                sb.AppendLine("},");
+
+                sb.AppendLine("dependencies:[");
+                sb.AppendLine("{ src: '../presentation/plugin/multiplex/socket.io.js', async: true },");
+                if (string.IsNullOrEmpty(multiplexSecret))
+                {
+                    sb.AppendLine("{ src: '../presentation/plugin/multiplex/client.js', async: true }");
+                }
+                else
+                {
+                    //sb.AppendLine("{ src: '../presentation/plugin/multiplex/client.js', async: true },");
+                    sb.AppendLine("{ src: '../presentation/plugin/multiplex/master.js', async: true }");
+                }
+                sb.AppendLine("]");
+            }
+
             sb.AppendLine("});");
 
             script.TextContent = sb.ToString();

@@ -10,5 +10,8 @@
         public const string SlideDeskCopyright = "Copyright";
         public const string SectionPosition = "Position";
         public const string SectionPath = "Path";
+        public const string MultiplexSecret = "MultiplexSecret";
+        public const string MultiplexId = "MultiplexId";
+        public const string MultiplexUrl = "MultiplexUrl";
     }
 }

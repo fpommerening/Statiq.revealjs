@@ -17,5 +17,7 @@ namespace FP.Statiq.RevealJS.Models
         public string Password { get; set; }
 
         public string Copyright { get; set; }
+
+        public Multiplex Multiplex { get; set; }
     }
 }
