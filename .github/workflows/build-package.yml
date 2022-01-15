@@ -24,7 +24,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore src/Statiq.RevealJS.csproj
     - name: Build
@@ -49,7 +49,7 @@ jobs:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         tags: |
          type=sha
-         type=raw,value=v1.1.0
+         type=raw,value=v2.0.0
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
