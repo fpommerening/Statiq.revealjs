@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using AngleSharp.Dom;
 using Statiq.Common;
-using Statiq.Html;
+using Statiq.Core;
 using IDocument = Statiq.Common.IDocument;
 
 namespace FP.Statiq.RevealJS.Business

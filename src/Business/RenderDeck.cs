@@ -8,7 +8,7 @@ using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
 using FP.Statiq.RevealJS.Properties;
 using Statiq.Common;
-using Statiq.Html;
+using Statiq.Core;
 
 namespace FP.Statiq.RevealJS.Business
 {
@@ -52,7 +52,7 @@ namespace FP.Statiq.RevealJS.Business
             using (var contentStream = context.GetContentStream())
             using (var writer = contentStream.GetWriter())
             {
-                htmlDocument.ToHtml(writer, ProcessingInstructionFormatter.Instance);
+                htmlDocument.ToHtml(writer, StatiqMarkupFormatter.Instance);
                 writer.Flush();
                 var doc = new Document($"{firstInput[MetadataKeys.SlideDeskAccess]}/index.html", firstInput, context.GetContentProvider(contentStream,
                     MediaTypes.Html));
