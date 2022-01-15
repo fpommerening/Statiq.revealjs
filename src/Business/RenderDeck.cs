@@ -8,7 +8,6 @@ using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
 using FP.Statiq.RevealJS.Properties;
 using Statiq.Common;
-using Statiq.Core;
 
 namespace FP.Statiq.RevealJS.Business
 {
