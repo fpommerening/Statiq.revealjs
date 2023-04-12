@@ -49,7 +49,7 @@ jobs:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         tags: |
          type=sha
-         type=raw,value=v2.0.0
+         type=raw,value=v3.0.0
     - name: Build and push
       uses: docker/build-push-action@v2
       with:

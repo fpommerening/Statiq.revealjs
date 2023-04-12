@@ -6,7 +6,7 @@ namespace FP.Statiq.RevealJS.Business
     {
         public FrameworkPipeline()
         {
-            InputModules.Add(new DownloadGitHub("fpommerening", "presentation", "reveal-js-4.1.2"));
+            InputModules.Add(new DownloadGitHub("fpommerening", "presentation", "reveal-js-4.4.0"));
             ProcessModules.Add(new ExtractZipArchive("presentation"));
             OutputModules.Add(new WriteFiles());
         }
