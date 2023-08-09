@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using AngleSharp.Dom;
+using Microsoft.Extensions.DependencyInjection;
 using Statiq.Common;
 using Statiq.Core;
 using IDocument = Statiq.Common.IDocument;
@@ -10,9 +11,8 @@ namespace FP.Statiq.RevealJS.Business
 {
     public class EmbeedImages : ProcessHtml
     {
-
         public EmbeedImages() : base("IMG",
-            (document, context, element) => ProcessElement(document, context, element))
+            (document, context, element) =>  ProcessElement(document, context, element))
         {
         }
 
@@ -23,7 +23,7 @@ namespace FP.Statiq.RevealJS.Business
 
         private static async Task ProcessElementAsync(IDocument document, IExecutionContext context, IElement imgElement)
         {
-            
+            var imageCache = context.Services.GetService<ImageCache>();
             var src = imgElement.GetAttribute("src");
             if (string.IsNullOrEmpty(src))
             {
@@ -39,9 +39,7 @@ namespace FP.Statiq.RevealJS.Business
 
             if (src.StartsWith("http"))
             {
-                var imageResult = await context.SendHttpRequestWithRetryAsync(src);
-                imageResult.EnsureSuccessStatusCode();
-                imageData = await imageResult.Content.ReadAsByteArrayAsync();
+                imageData = await imageCache.DownloadImage(context, src);
             }
             else
             {

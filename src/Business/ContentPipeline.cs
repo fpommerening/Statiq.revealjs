@@ -1,13 +1,20 @@
-﻿using Statiq.Core;
+﻿using Statiq.Common;
+using Statiq.Core;
 using Statiq.Minification;
 
 namespace FP.Statiq.RevealJS.Business
 {
     public class ContentPipeline : Pipeline
     {
-        public ContentPipeline()
-        { 
-            InputModules.Add(new ReadFiles("*.rsd"));
+        public ContentPipeline(IReadOnlySettings readOnlySettings)
+        {
+            var patterns = "*.rsd";
+            if(readOnlySettings.TryGetValue("patterns", out var settingValue) &&
+               settingValue != null && !string.IsNullOrEmpty(settingValue.ToString()))
+            {
+                patterns = settingValue.ToString();
+            }
+            InputModules.Add(new ReadFiles(patterns));
             ProcessModules.Add(new LoadSlideDesk());
             ProcessModules.Add(new LoadSections());
             ProcessModules.Add(new EmbeedImages());
