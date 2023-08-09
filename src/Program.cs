@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using FP.Statiq.RevealJS.Business;
+using Microsoft.Extensions.DependencyInjection;
 using Statiq.App;
 using Statiq.Common;
 
@@ -9,26 +10,17 @@ namespace FP.Statiq.RevealJS
     {
         public static async Task<int> Main(string[] args)
         {
-            return 
-            await Bootstrapper
+            
+            return await Bootstrapper
                 .Factory
                 .CreateDefault(args)
-
                 .ConfigureServices((services, config) =>
                 {
+                    services.AddSingleton<ImageCache>();
                 })
-                //.AddDefaultConfigurationFiles()
-                //.AddInputPath(@"C:\projects\Statiq.revealjs\data")
                 .AddPipeline<ContentPipeline>()
                 .AddPipeline<FrameworkPipeline>()
-
-                //.BuildPipeline("", builder => builder
-                //    .WithProcessModules(new LoadSlideDesk())
-                //    .WithProcessModules(new LoadSections())
-                //    .WithProcessModules (new EmbeedImages())
-                //    .WithPostProcessModules((IModule)new RenderDeck())
-                //    .WithPostProcessModules((IModule)new EncryptContent())
-                //    .WithOutputWriteFiles())
+                .AddCommand<FileWatchCommand>("watch")
                 .RunAsync();
         }
     }
