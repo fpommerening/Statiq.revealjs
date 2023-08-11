@@ -19,6 +19,7 @@ namespace FP.Statiq.RevealJS.Business
             
         }
         
+        bool hasChanges = false;
         
         protected override async Task<int> ExecuteEngineAsync(CommandContext commandContext, PipelinesCommandSettings commandSettings,
             IEngineManager engineManager)
@@ -39,18 +40,15 @@ namespace FP.Statiq.RevealJS.Business
             {
                 return (int)completeResult;
             }
-
-            bool hasChanges = false;
-
             do
             {
                 var slidesFolder = new DirectoryInfo(commandSettings.InputPaths.First()).Parent;
 
                 using FileSystemWatcher fileSystemWatcher = new FileSystemWatcher(slidesFolder.FullName);
                 fileSystemWatcher.IncludeSubdirectories = true;
-                fileSystemWatcher.Changed += (sender, args) => hasChanges = true;
-                fileSystemWatcher.Created += (sender, args) => hasChanges = true;
-                fileSystemWatcher.Deleted += (sender, args) => hasChanges = true;
+                fileSystemWatcher.Changed += FileSystemWatcherOnChanged;
+                fileSystemWatcher.Created += FileSystemWatcherOnChanged;
+                fileSystemWatcher.Deleted += FileSystemWatcherOnChanged;
                 fileSystemWatcher.EnableRaisingEvents = true;
 
                 while (!cancellationTokenSource.IsCancellationRequested)
@@ -70,6 +68,14 @@ namespace FP.Statiq.RevealJS.Business
             } while (!cancellationTokenSource.IsCancellationRequested);
 
             return 0;
+        }
+
+        private void FileSystemWatcherOnChanged(object sender, FileSystemEventArgs e)
+        {
+            if (!hasChanges && !e.FullPath.Contains("\\.git\\") && !e.FullPath.Contains("/.git/"))
+            {
+                hasChanges = true;
+            }
         }
     }
 }
