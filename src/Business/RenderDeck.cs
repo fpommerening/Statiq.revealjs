@@ -103,7 +103,6 @@ public class RenderDeck : Module
         if (string.IsNullOrEmpty(multiplexUrl) || string.IsNullOrEmpty(multiplexSocketId))
         {
             sb.AppendLine("dependencies:[");
-            sb.AppendLine("{ src: '../presentation/plugin/countdown/countdown.js' },");
             sb.AppendLine("]");
         }
         else
@@ -116,7 +115,6 @@ public class RenderDeck : Module
             sb.AppendLine("},");
 
             sb.AppendLine("dependencies:[");
-            sb.AppendLine("{ src: '../presentation/plugin/countdown/countdown.js' },");
             sb.AppendLine("{ src: '../presentation/plugin/multiplex/socket.io.js', async: true },");
             if (string.IsNullOrEmpty(multiplexSecret))
             {
