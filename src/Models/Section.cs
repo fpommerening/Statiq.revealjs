@@ -1,9 +1,8 @@
-﻿namespace FP.Statiq.RevealJS.Models
-{
-    public class Section
-    {
-        public string Path { get; set; }
+﻿namespace FP.Statiq.RevealJS.Models;
 
-        public string Content { get; set; }
-    }
+public class Section
+{
+    public string Path { get; set; }
+
+    public string Content { get; set; }
 }
