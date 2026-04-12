@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using Microsoft.Extensions.Logging;
 using Statiq.Common;
 
 namespace FP.Statiq.RevealJS.Business;
@@ -12,8 +13,10 @@ public class ImageCache
         {
             return dataFromCache;
         }
-            
-        var imageResult = await context.SendHttpRequestWithRetryAsync(src);
+        var uri = new Uri(src);
+        context.Log(LogLevel.Information, $"Downloading {uri}");
+        var imageResult = await context.SendHttpRequestWithRetryAsync(() => new HttpRequestMessage(HttpMethod.Get, uri), 2);
+        context.Log(LogLevel.Information, $"Downloaded {uri}");
         imageResult.EnsureSuccessStatusCode();
         var data = await imageResult.Content.ReadAsByteArrayAsync();
         _files[src] = data;
