@@ -1,24 +1,60 @@
 ﻿using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
 using Microsoft.Extensions.DependencyInjection;
-using Statiq.Common;
-using Statiq.Core;
 using IDocument = Statiq.Common.IDocument;
 
 namespace FP.Statiq.RevealJS.Business;
 
-public class EmbeedImages : ProcessHtml
+public class EmbeedImages : ParallelModule
 {
-    public EmbeedImages() : base("IMG",
-        (document, context, element) =>  ProcessElement(document, context, element))
+    protected override async Task<IEnumerable<IDocument>> ExecuteInputAsync(IDocument input, IExecutionContext context)
     {
+       return await ProcessElementsAsync(input, context);
     }
 
-    private static void ProcessElement(IDocument document, IExecutionContext context, IElement imgElement)
+    private static async Task<IEnumerable<IDocument>> ProcessElementsAsync(
+        IDocument input,
+        IExecutionContext context)
     {
-        ProcessElementAsync(document, context, imgElement).GetAwaiter().GetResult();
+        IHtmlDocument originalHtmlDocument = await input.ParseHtmlAsync(false);
+        if (originalHtmlDocument is null)
+        {
+            return input.Yield();
+        }
+
+        try
+        {
+            IHtmlDocument htmlDocument = (IHtmlDocument)originalHtmlDocument.Clone();
+            IElement[] elements = htmlDocument.QuerySelectorAll("IMG").ToArray();
+
+            if (elements.Length > 0 && elements[0] is not null)
+            {
+                foreach (IElement element in elements)
+                {
+                    await ProcessImgElementAsync(input, context, element);
+                }
+
+                if (originalHtmlDocument.Equals(htmlDocument))
+                {
+                    return input.Yield();
+                }
+
+                IContentProvider contentProvider = context.GetContentProvider(htmlDocument);
+                IDocument output = input.Clone(contentProvider);
+                return output.Yield();
+            }
+
+            return input.Yield();
+        }
+        catch (Exception ex)
+        {
+            context.LogWarning(input, $"Exception while processing HTML {ex.Message}");
+            return input.Yield();
+        }
     }
 
-    private static async Task ProcessElementAsync(IDocument document, IExecutionContext context, IElement imgElement)
+
+    private static async Task ProcessImgElementAsync(IDocument document, IExecutionContext context, IElement imgElement)
     {
         var imageCache = context.Services.GetService<ImageCache>();
         var src = imgElement.GetAttribute("src");
@@ -40,11 +76,11 @@ public class EmbeedImages : ProcessHtml
         }
         else
         {
-            var baseUrl = context.Settings["baseUrl"].ToString();
+            var baseUrl = context.Settings["baseUrl"].ToString()!;
             var sectionPath = document[MetadataKeys.SectionPath].ToString();
             var path = string.IsNullOrEmpty(sectionPath)
                 ? Path.Combine(baseUrl, src)
-                : Path.Combine(baseUrl, Path.GetDirectoryName(sectionPath), src);
+                : Path.Combine(baseUrl, Path.GetDirectoryName(sectionPath)!, src);
             imageData = await File.ReadAllBytesAsync(path);
         }
 
@@ -62,5 +98,4 @@ public class EmbeedImages : ProcessHtml
             imgElement.SetAttribute("src", $"data:image/jpeg;base64, {imageDataDecoded}");
         }
     }
-
 }
