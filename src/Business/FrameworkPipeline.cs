@@ -6,7 +6,7 @@ public class FrameworkPipeline : Pipeline
 {
     public FrameworkPipeline()
     {
-        InputModules.Add(new DownloadGitHub("fpommerening", "presentation", "reveal-js-5.2.1").CacheResponses());
+        InputModules.Add(new DownloadGitHub("fpommerening", "presentation", "reveal-js-6.0.1").CacheResponses());
         ProcessModules.Add(new ExtractZipArchive("presentation"));
         OutputModules.Add(new WriteFiles());
     }
